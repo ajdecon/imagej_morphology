@@ -2,17 +2,21 @@
  Mathematical Morphology plugins for ImageJ
 ===========================================================
 Author: Adam DeConinck
-Date last modified: 31 August 2010
+Date last modified: 16 September 2010
 
 Summary: 
 A set of plugins for the popular image processing program
 ImageJ to implement morphological processing operations 
-using a custom structuring element.
+using a custom structuring element. Most of the logic
+is implemented in the org.ajdecon.morphology package
+included here; top-level .java files are the plugin 
+user interfaces.
 
-Build instructions:
-1. Make sure that the ImageJ package (ij.jar) is in your 
-Java classpath, as is the current directory.
-2. Compile the 
+Simple build instructions:
+1. Make sure that the ImageJ package (ij.jar) is in the
+current directory, or modify the makefile.
+2. To compile: make
+3. To produce plugin .jar file: jar cvf ./*
 
 Installation:
 1. Install ImageJ. (Latest version found at 
@@ -76,7 +80,9 @@ use in other software, and I have explored using this code
 for large scale morphological image processing with a 
 Java framework such as Hadoop.
 
-The src/ directory includes:
+Contents:
+
+makefile
 
 plugins.config: instructions for the ImageJ user interface.
 
