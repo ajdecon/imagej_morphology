@@ -16,7 +16,7 @@ Simple build instructions:
 1. Make sure that the ImageJ package (ij.jar) is in the
 current directory, or modify the makefile.
 2. To compile: make
-3. To produce plugin .jar file: jar cvf ./*
+3. To produce plugin .jar file: jar cvf Morphology_.jar ./*
 
 Installation:
 1. Install ImageJ. (Latest version found at 
