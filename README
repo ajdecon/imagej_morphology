@@ -1,0 +1,92 @@
+===========================================================
+ Mathematical Morphology plugins for ImageJ
+===========================================================
+Author: Adam DeConinck
+Date last modified: 31 August 2010
+
+Summary: 
+A set of plugins for the popular image processing program
+ImageJ to implement morphological processing operations 
+using a custom structuring element.
+
+Build instructions:
+1. Make sure that the ImageJ package (ij.jar) is in your 
+Java classpath, as is the current directory.
+2. Compile the 
+
+Installation:
+1. Install ImageJ. (Latest version found at 
+http://rsbweb.nih.gov/ij/)
+2. Copy Morphology_.jar into the plugins directory of 
+ImageJ.
+
+Usage:
+1. Open a binary or grayscale image in ImageJ.
+2. Open the Plugins>Morphology menu and select New 
+Structuring Element. This will produce a simple image 
+such as a square, circle, or line which will be used to 
+operate on the image.
+3. Open thr Plugins>Morphology menu and select another 
+operation such as Erode. Select the object image and 
+structuring element in the dialog which comes up. This 
+will perform the given morphological operation on the 
+object image.
+
+Detail:
+Mathematical morphology is a technique for processing 
+geometrical structures, particularly in images. It 
+generally makes use of a simple shape called a structuring
+element, which is then superimposed with its center over 
+each pixel of an object image (the "target" pixel). 
+Depending on the values of the object pixels corresponding 
+to the shape of the structuring element, the value of the
+target pixel may be changed. These techniques have 
+applications in various types of object recognition and
+segmentation.
+
+A simple example of a morphological operation is erosion 
+in a binary image.  For each pixel, examine the values of
+the pixels in the neighborhood defined by the structuring
+element. If they are all foreground pixels, the target 
+becomes a foreground pixel; otherwise, it becomes a 
+background pixel. This has the effect of eroding the 
+edges of large structures with a bias defined by the 
+shape of the structuring element.
+
+(see http://en.wikipedia.org/wiki/Mathematical_morphology
+for more information)
+
+My research over the past few years has produced large 
+amounts of data in the form of microscopy images. 
+Analyzing this data has required, among other things, the 
+use of morphological processing to analyze the shapes and
+separation of physical objects imaged. While these 
+operations are all well-supported in scientific programming
+languages such as Matlab or scipy, these don't make the
+best tools for visual exploratory data analysis.
+
+ImageJ is a popular image processing tool in the scientific
+community, but its morphological image processing functions
+are rudimentary and do not support different structuring
+elements. To visually explore my data, and better learn
+mathematical morphology, I wrote the attached analysis code
+based on the ImageJ API and plugins for the user interface.
+ImageJ may also be packaged as a convenient library for
+use in other software, and I have explored using this code
+for large scale morphological image processing with a 
+Java framework such as Hadoop.
+
+The src/ directory includes:
+
+plugins.config: instructions for the ImageJ user interface.
+
+Plugins: Dilate_.java, Erode_.java, Hit_Or_Miss.java, 
+Morph_Close.java, Morph_Open.java, 
+Morphological_Gradient.java, New_Structuring_Element.java,
+Otsu_Threshold.java, Top_Hat.java
+
+org/ajdecon/morphology/: a package for image morphology 
+using the ImageJ API, containing:
+
+  StructElement.java: object to define structuring elements.
+  Morphology.java: utility methods for image morphology.
