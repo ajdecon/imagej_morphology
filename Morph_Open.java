@@ -25,10 +25,10 @@ public class Morph_Open implements PlugIn {
 
 		ImagePlus e = Morphology.open(object,se);
 		e.show();
-
 	}
 
 	private String[] imageList() {
+
 		int numImages = ij.WindowManager.getImageCount();
 		String[] result = new String[numImages];
 		for (int n=1; n<=numImages; n++) {
@@ -41,7 +41,8 @@ public class Morph_Open implements PlugIn {
 	}
 
 	private GenericDialog erosionDialog(String[] imageList) {
-		GenericDialog result = new GenericDialog("Image Opening");
+		
+        GenericDialog result = new GenericDialog("Image Opening");
 		result.addMessage("Image opening\n" +
 			"Result of an erosion followed by a dilation.");
 		result.addChoice("Object image:",imageList,imageList[0]);
@@ -49,6 +50,5 @@ public class Morph_Open implements PlugIn {
 		result.addCheckbox("Background is white:",true);
 
 		return result;		
-
 	}
 }

@@ -9,7 +9,6 @@ import org.ajdecon.morphology.*;
 public class Erode_ implements PlugIn {
 
 	public void run(String arg) {
-
 		String[] available = imageList();
 		GenericDialog inputs = erosionDialog(available);
 		inputs.showDialog();
@@ -26,7 +25,6 @@ public class Erode_ implements PlugIn {
 		ImagePlus e = Morphology.erode(object,se);
 		e.show();
 		return;
-
 	}
 
 	private String[] imageList() {
@@ -37,7 +35,6 @@ public class Erode_ implements PlugIn {
 					ij.WindowManager.getNthImageID(n));
 			result[n-1] = im.getTitle();
 		}
-
 		return result;
 	}
 
@@ -53,8 +50,6 @@ public class Erode_ implements PlugIn {
 		result.addChoice("Object image:",imageList,imageList[0]);
 		result.addChoice("Structuring element:",imageList,imageList[0]);
 		result.addCheckbox("Background is white:",true);
-
 		return result;		
-
 	}
 }

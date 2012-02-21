@@ -19,10 +19,8 @@ import java.util.Arrays;
  *
  */
 public class StructElement{
-
 /*
  * Constants and properties.
- *
  */
 	public static final String CIRCLE = "circle";
 	public static final String SQUARE = "square";
@@ -36,7 +34,6 @@ public class StructElement{
 
 /*
  * Constructors!
- *
  */
 	/**
 	 * 
@@ -54,11 +51,10 @@ public class StructElement{
 	public StructElement(ImagePlus im, boolean bgWhite) {
 
 		setBgWhite(bgWhite);
-
 		try {		
-		// Ensure we have an image with odd width and height.
-		if ( (im.getWidth() % 2 == 0) || (im.getHeight() % 2 == 0) ) {
-			throw new Exception("Structuring elements must have odd-numbered height and width!");
+		    // Ensure we have an image with odd width and height.
+    		if ( (im.getWidth() % 2 == 0) || (im.getHeight() % 2 == 0) ) {
+	    		throw new Exception("Structuring elements must have odd-numbered height and width!");
 		}
 
 		// Make our ImagePlus contents an 8-bit image.
@@ -73,7 +69,6 @@ public class StructElement{
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	/**
@@ -89,20 +84,18 @@ public class StructElement{
 	public StructElement(String name, int size, boolean bgWhite) {
 
 		setBgWhite(bgWhite);
-
 		try {
 
-		if (name.equalsIgnoreCase(CIRCLE)) {
-			contents = makeCircle(size);
-		} else if (name.equalsIgnoreCase(SQUARE)) {
-			if (size % 2 == 0) {
-				throw new Exception("Size of structuring element must be an odd number of pixels!");
-			}
-			contents = makeRect(size, size); 
-		} else {
-			throw new Exception("Unknown type of structuring element!");
-		}
-
+		    if (name.equalsIgnoreCase(CIRCLE)) {
+			    contents = makeCircle(size);
+		    } else if (name.equalsIgnoreCase(SQUARE)) {
+			    if (size % 2 == 0) {
+				    throw new Exception("Size of structuring element must be an odd number of pixels!");
+    			}
+	    		contents = makeRect(size, size); 
+		    } else {
+			    throw new Exception("Unknown type of structuring element!");
+    		}
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -123,30 +116,27 @@ public class StructElement{
 	public StructElement(String name, int size1, int size2, boolean bgWhite) {
 
 		setBgWhite(bgWhite);
-
-
 		try {
-		if (name.equalsIgnoreCase(RING)) {
-			contents = makeRing(size1, size2);
-		} else if (name.equalsIgnoreCase(RECT)) {
-			if ( (size1 % 2 == 0) || (size2 % 2 == 0) ) {
-				throw new Exception("Structuring elements must have odd-numbered height and width!");
-			}
-			contents = makeRect(size1, size2); 
-		} else if (name.equalsIgnoreCase(LINE)) {
-	
-			//	if (size1 % 2 == 0) {
-			//		throw new Exception("Size of structuring element must be an odd number of pixels!");
-			//	}
-				contents = makeLine(size1, size2); 
-		} else {
-				throw new Exception("Unknown type of structuring element!");
-		}
+            if (name.equalsIgnoreCase(RING)) {
+                contents = makeRing(size1, size2);
+            } else if (name.equalsIgnoreCase(RECT)) {
+                if ( (size1 % 2 == 0) || (size2 % 2 == 0) ) {
+                    throw new Exception("Structuring elements must have odd-numbered height and width!");
+                }
+                contents = makeRect(size1, size2); 
+            } else if (name.equalsIgnoreCase(LINE)) {
+        
+                //	if (size1 % 2 == 0) {
+                //		throw new Exception("Size of structuring element must be an odd number of pixels!");
+                //	}
+                    contents = makeLine(size1, size2); 
+            } else {
+                    throw new Exception("Unknown type of structuring element!");
+            }
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 
@@ -156,7 +146,6 @@ public class StructElement{
 	private ImagePlus makeCircle(int radius) {
 		ByteProcessor bp = new ByteProcessor(2*radius+1, 2*radius+1);
 		int width = 2*radius+1;
-
 		for (int x=-radius; x<=radius; x++) {
 			for (int y=-radius; y<=radius; y++) {
 				if (inRadius(radius,x,y)) {
@@ -166,39 +155,28 @@ public class StructElement{
 				}
 			}
 		}
-
 		if (!(isBgWhite())) {
 			bp.invert();
 		}
-
 		ImagePlus result = new ImagePlus("circle structuring element", bp);
-
 		return result;
-
 	}
 
 	private ImagePlus makeRect(int width, int height) {
-
 		ByteProcessor bp = new ByteProcessor(width, height);
-
 		for (int x=0; x<width; x++) {
 			for (int y=0; y<height; y++) {
 				bp.set(x,y,0);
 			}
 		}
-
 		if (!(isBgWhite())) {
 			bp.invert();
 		}
-
 		ImagePlus result = new ImagePlus("rect structuring element", bp);
-
 		return result;
-
 	}
 
 	private ImagePlus makeLine(int length, int angle) {
-
 		double radians = Math.PI/2 + angle*Math.PI/180.0;
 
 		// Produce a square ByteProcessor big enough to hold our line SE.
@@ -206,39 +184,30 @@ public class StructElement{
 		if (height % 2 == 0) {
 			height+=1;
 		}
-
 		if (height <= length) {
 			height=length;
 		} else {
 			length = height;
 		}
-
 		ByteProcessor bp = new ByteProcessor(length,height);
-
 		// Initialize to background.
 		for (int x=0;x<length;x++) {
 			for (int y=0;y<height; y++) {
 				bp.set(x,y,255);
 			}
 		}
-
 		// Create straight line.
 		for (int i=0;i<length;i++) {
 			bp.set(i,(int)Math.floor(height/2),0);
 		}
-
 		// Rotate.
 		bp.rotate((double)angle);
-
 		// Invert if needed.
 		if (!(isBgWhite())) {
 			bp.invert();
 		}
-
 		ImagePlus result = new ImagePlus("rect structuring element", bp);
-
 		return result;
-
 	}
 
 	private ImagePlus makeRing(int inside, int outside) {
@@ -258,13 +227,10 @@ public class StructElement{
 				}
 			}
 		}
-
 		if (!(isBgWhite())) {
 			bp.invert();
 		}
-
 		ImagePlus result = new ImagePlus("ring structuring element", bp);
-
 		return result;
 	}
 
@@ -327,9 +293,7 @@ public class StructElement{
 	 *
 	 */
 	public void setObject(ImagePlus im, boolean symmetric) {
-
 		object = new ObjectWindow(im, this, bgValue, symmetric);
-
 	}
 
 	/**
@@ -338,9 +302,7 @@ public class StructElement{
 	 *
 	 */
 	public int[] window(int x0, int y0) {
-
 		return object.view(x0,y0);			
-
 	}
 
 	/**
@@ -359,9 +321,7 @@ public class StructElement{
 				}
 			}
 		}
-
 		return counter;
-		
 	}
 
 	/**
@@ -372,7 +332,6 @@ public class StructElement{
 	public void printStructure(PrintStream pr) {
 
 		int[][] pixels = contents.getProcessor().getIntArray();
-
 		for (int y=0; y<pixels.length; y++) {
 			for (int x=0;x<pixels[y].length; x++) {
 				if (pixels[y][x]==bgValue) {
@@ -403,7 +362,6 @@ public class StructElement{
 		}
 		return false;
 	}
-
 }
 
 /**
@@ -455,10 +413,8 @@ class ObjectWindow {
 
 		for (int x=-dx; x<=dx; x++) {
 			for (int y=-dx; y<=dx; y++) {
-				
 				// Check if we are in a SE foreground pixel.
 				if (se[x+dx][y+dy]!=bgValue) {
-					
 					// Coordinates in the object image.
 					int xc=x0+x; int yc=y0+y;
 
@@ -513,7 +469,6 @@ class ObjectWindow {
 				
 			}
 		}
-
 		return result;	
 	}
 }

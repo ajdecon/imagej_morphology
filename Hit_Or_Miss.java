@@ -9,7 +9,6 @@ import org.ajdecon.morphology.*;
 public class Hit_Or_Miss implements PlugIn {
 
 	public void run(String arg) {
-
 		String[] available = imageList();
 		GenericDialog inputs = erosionDialog(available);
 		inputs.showDialog();
@@ -29,7 +28,6 @@ public class Hit_Or_Miss implements PlugIn {
 		ImagePlus e = Morphology.hitOrMiss(object,se,se2);
 		e.show();
 		return;
-
 	}
 
 	private String[] imageList() {
@@ -40,7 +38,6 @@ public class Hit_Or_Miss implements PlugIn {
 					ij.WindowManager.getNthImageID(n));
 			result[n-1] = im.getTitle();
 		}
-
 		return result;
 	}
 
@@ -57,8 +54,6 @@ public class Hit_Or_Miss implements PlugIn {
 		result.addChoice("Structuring element 1:",imageList,imageList[0]);
 		result.addChoice("Structuring element 2:",imageList,imageList[0]);
 		result.addCheckbox("Background is white:",true);
-
 		return result;		
-
 	}
 }

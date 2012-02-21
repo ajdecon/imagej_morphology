@@ -51,7 +51,6 @@ public class Morphology {
 
 		// Send image to structuring element for speed and set symmetry.
 		s.setObject(in, symmetric);
-
 		for(int x=0; x<width; x++) {
 			for (int y=0; y<height; y++) {
 				op.set(x,y, (int)Math.round(
@@ -94,13 +93,11 @@ public class Morphology {
 	 *
 	 */
 	public static ImagePlus erode(ImagePlus im, StructElement s) {
-
 		if (s.isBgWhite()) {
 			return percentileFilter(im, s, 100.0);
 		} else {
 			return percentileFilter(im, s, 0.0);
 		}
-
 	}
 
 	/**
@@ -126,13 +123,11 @@ public class Morphology {
 	 *
 	 */
 	public static ImagePlus dilate(ImagePlus im, StructElement s) {
-
 		if (s.isBgWhite()) {
 			return percentileFilter(im, s, 0.0);
 		} else {
 			return percentileFilter(im, s, 100.0);
 		}
-
 	}
 
 	/**
@@ -170,7 +165,6 @@ public class Morphology {
 				dp.set(x,y, (int)dp.getPixel(x,y) - (int)ep.getPixel(x,y) );
 			}
 		}
-
 		return d;
 	}
 
@@ -203,9 +197,7 @@ public class Morphology {
 				ip.set( x, y, ip.getPixel(x,y) & bg.getProcessor().getPixel(x,y) );
 			}
 		}
-
 		return fg;
-
 	}
 
 	/**
@@ -222,7 +214,6 @@ public class Morphology {
 		ImagePlus result = new ImagePlus("top hat", im.getProcessor());
 		ImageConverter ic = new ImageConverter(result);
 		ic.convertToGray8();
-
 		ImageProcessor rip = result.getProcessor();
 
 		if (white) {
@@ -252,7 +243,6 @@ public class Morphology {
 	 *
 	 */
 	private static double percentile(int[] values, double perc) {
-		
 		Arrays.sort(values);
 
 		// n is the rank of the percentile value in the sorted array.
@@ -268,7 +258,6 @@ public class Morphology {
 			return values[k-1] + d*(values[k] - values[k-1]);
 		}
 	}
-
 }
 
 

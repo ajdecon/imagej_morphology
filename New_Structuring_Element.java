@@ -35,10 +35,10 @@ public class New_Structuring_Element implements PlugIn {
 
 		ImagePlus e = se.getImage();
 		e.show();
-
 	}
 
 	private GenericDialog structDialog(String[] choices) {
+        
 		GenericDialog result = new GenericDialog("New Structuring Element");
 		result.addMessage("New structuring element\n"+
 			"Size 1 is the radius of a circle, the width of a rectangle or "+
@@ -51,6 +51,5 @@ public class New_Structuring_Element implements PlugIn {
 		result.addCheckbox("Background is white:",true);
 
 		return result;		
-
 	}
 }

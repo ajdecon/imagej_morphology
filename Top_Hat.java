@@ -27,7 +27,6 @@ public class Top_Hat implements PlugIn {
 		ImagePlus e = Morphology.topHat(object,se,thWhite);
 		e.show();
 		return;
-
 	}
 
 	private String[] imageList() {
@@ -43,6 +42,7 @@ public class Top_Hat implements PlugIn {
 	}
 
 	private GenericDialog erosionDialog(String[] imageList) {
+
 		GenericDialog result = new GenericDialog("Top Hat Transform");
 		result.addMessage("Top Hat Transform\n" +
 			"White top hat: difference between image and its opening.\n" +
@@ -53,6 +53,5 @@ public class Top_Hat implements PlugIn {
 		result.addCheckbox("Background is white:",true);
 
 		return result;		
-
 	}
 }
