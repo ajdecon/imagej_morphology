@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="ImageJ Morphology Plugins : " />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>ImageJ Morphology Plugins</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/ajdecon/imagej_morphology">Fork Me on GitHub</a>
+
+          <h1 id="project_title">ImageJ Morphology Plugins</h1>
+          <h2 id="project_tagline"></h2>
+
+          <section id="downloads">
+            <a class="zip_download_link" href="https://github.com/ajdecon/imagej_morphology/zipball/master">Download this project as a .zip file</a>
+            <a class="tar_download_link" href="https://github.com/ajdecon/imagej_morphology/tarball/master">Download this project as a tar.gz file</a>
+          </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>Mathematical Morphology plugins for ImageJ</h1>
+
+<h3>Download JAR file: <a href="https://github.com/downloads/ajdecon/imagej_morphology/Morphology_.jar">Morphology_.jar</a>
+</h3>
+
+<h2>Summary:</h2>
+
+<p>A set of plugins for the popular image processing program
+ImageJ to implement morphological processing operations 
+using a custom structuring element. Most of the logic
+is implemented in the org.ajdecon.morphology package
+included here; top-level .java files are the plugin 
+user interfaces.</p>
+
+<h2>Simple build instructions:</h2>
+
+<ol>
+<li>Make sure that the ImageJ package (ij.jar) is in the
+current directory, or modify the makefile.</li>
+<li>To compile: make</li>
+<li>To produce plugin .jar file: jar cvf Morphology_.jar ./*</li>
+</ol><h2>Installation:</h2>
+
+<ol>
+<li>Install ImageJ. (Latest version found at 
+<a href="http://rsbweb.nih.gov/ij/">http://rsbweb.nih.gov/ij/</a>)</li>
+<li>Copy Morphology_.jar into the plugins directory of 
+ImageJ.</li>
+</ol><h2>Usage:</h2>
+
+<ol>
+<li>Open a binary or grayscale image in ImageJ.</li>
+<li>Open the Plugins&gt;Morphology menu and select New 
+Structuring Element. This will produce a simple image 
+such as a square, circle, or line which will be used to 
+operate on the image.</li>
+<li>Open thr Plugins&gt;Morphology menu and select another 
+operation such as Erode. Select the object image and 
+structuring element in the dialog which comes up. This 
+will perform the given morphological operation on the 
+object image.</li>
+</ol><h2>Detail:</h2>
+
+<p>Mathematical morphology is a technique for processing 
+geometrical structures, particularly in images. It 
+generally makes use of a simple shape called a structuring
+element, which is then superimposed with its center over 
+each pixel of an object image (the "target" pixel). 
+Depending on the values of the object pixels corresponding 
+to the shape of the structuring element, the value of the
+target pixel may be changed. These techniques have 
+applications in various types of object recognition and
+segmentation.</p>
+
+<p>A simple example of a morphological operation is erosion 
+in a binary image.  For each pixel, examine the values of
+the pixels in the neighborhood defined by the structuring
+element. If they are all foreground pixels, the target 
+becomes a foreground pixel; otherwise, it becomes a 
+background pixel. This has the effect of eroding the 
+edges of large structures with a bias defined by the 
+shape of the structuring element.</p>
+
+<p>(see <a href="http://en.wikipedia.org/wiki/Mathematical_morphology">http://en.wikipedia.org/wiki/Mathematical_morphology</a>
+for more information)</p>
+
+<p>My research over the past few years has produced large 
+amounts of data in the form of microscopy images. 
+Analyzing this data has required, among other things, the 
+use of morphological processing to analyze the shapes and
+separation of physical objects imaged. While these 
+operations are all well-supported in scientific programming
+languages such as Matlab or scipy, these don't make the
+best tools for visual exploratory data analysis.</p>
+
+<p>ImageJ is a popular image processing tool in the scientific
+community, but its morphological image processing functions
+are rudimentary and do not support different structuring
+elements. To visually explore my data, and better learn
+mathematical morphology, I wrote the attached analysis code
+based on the ImageJ API and plugins for the user interface.
+ImageJ may also be packaged as a convenient library for
+use in other software, and I have explored using this code
+for large scale morphological image processing with a 
+Java framework such as Hadoop.</p>
+
+<h2>Contents:</h2>
+
+<ul>
+<li><p>makefile</p></li>
+<li><p>plugins.config: instructions for the ImageJ user interface.</p></li>
+<li><p>Plugins: Dilate<em>.java, Erode</em>.java, Hit_Or_Miss.java, 
+Morph_Close.java, Morph_Open.java, 
+Morphological_Gradient.java, New_Structuring_Element.java,
+Otsu_Threshold.java, Top_Hat.java</p></li>
+<li>
+<p>org/ajdecon/morphology/: a package for image morphology 
+using the ImageJ API, containing:</p>
+
+<ul>
+<li>StructElement.java: object to define structuring elements.</li>
+<li>Morphology.java: utility methods for image morphology.</li>
+</ul>
+</li>
+</ul>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">ImageJ Morphology Plugins maintained by <a href="https://github.com/ajdecon">ajdecon</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-12576607-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+  </body>
+</html>
